@@ -21,8 +21,11 @@ This repo provides two methods for patch recombination
 
 * Naive method
    
-   Naive method assumes linear recombination of patches and gives relative weightage to patches with twice overlap(i.e. stride = 0.5*patch_size) as shown  ![Naive weightage](Images/patch_heatmap_without_smoothing.png)
-   Usually, segmentation models like U-Net take image patches and make predictions on those small local windows, without data near the border of the patches, so there might first be a high error on the predictions made near the outside of the window, in plus of the fact that predictions may be just concatenated, so it looks even more jagged. Therfore, predicting on overlapping patches and recombination through naive method helps in preventing jagged predictions.
+   Naive method assumes linear recombination of patches and gives relative weightage to patches with twice overlap(i.e. stride = 0.5*patch_size) as shown
+   
+   ![Naive weightage](Images/patch_heatmap_without_smoothing.png)
+   
+   Usually, segmentation models like U-Net take image patches and make predictions on those small local windows, without data   near the border of the patches, so there might first be a high error on the predictions made near the outside of the window, in plus of the fact that predictions may be just concatenated, so it looks even more jagged. Therfore, predicting on overlapping patches and recombination through naive method helps in preventing jagged predictions.
    
    You can use `stitch_patch` function in `utils.py` to recombine the patches using naive method. For more information look into the help string of the function
 
@@ -30,11 +33,22 @@ This repo provides two methods for patch recombination
 
 * Smoothing-spline method
 
-  This method use smoothing splines interpolation and Dihedral group rotation averaging of patches to reduce variance in stitched image. It gives smoothly varying weightage to different areas in patches ![Spline weightage](patch_heatmap.png) For eg. if following test image ![test image](Images/test_image.png) is broken into patches with some added noise then simply concatenating the patches together would result in following recombined image ![Cheaply combined image](cheaply_merged_patches.png) but if combined through smoothing-spline method then the same combined image would look like this: ![smooth image](Smoothly_Merged_Patches.png)
+  This method use smoothing splines interpolation and Dihedral group rotation averaging of patches to reduce variance in stitched image. It gives smoothly varying weightage to different areas in patches ![Spline weightage](patch_heatmap.png) For eg. if following test image
+  
+  ![test image](Images/test_image.png)
+  
+  is broken into patches with some added noise then simply concatenating the patches together would result in following recombined image
+  
+  ![Cheaply combined image](Images/cheaply_merged_patches.png)
+  
+  but if combined through smoothing-spline method then the same combined image would look like this: 
+  
+  ![smooth image](Images/Smoothly_Merged_Patches.png)
 
   You can either see demo of this method by directly running `smooth_stitch.py` or can import window function in your code to directly predict on large input image
 
-  ```python
+
+```python
 from smooth_tiled_predictions import predict_img_with_smooth_windowing
 
 from your_code import your_model
