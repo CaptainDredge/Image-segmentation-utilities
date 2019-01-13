@@ -33,7 +33,11 @@ This repo provides two methods for patch recombination
 
 * Smoothing-spline method
 
-  This method use smoothing splines interpolation and Dihedral group rotation averaging of patches to reduce variance in stitched image. It gives smoothly varying weightage to different areas in patches ![Spline weightage](patch_heatmap.png) For eg. if following test image
+  This method use smoothing splines interpolation and Dihedral group rotation averaging of patches to reduce variance in stitched image. It gives smoothly varying weightage to different areas in patches 
+  
+  ![Spline weightage](Images/patch_heatmap.png) 
+  
+  For eg. if following test image
   
   ![test image](Images/test_image.png)
   
