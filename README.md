@@ -53,7 +53,7 @@ This repo provides two methods for patch recombination
 
 
 ```python
-from smooth_tiled_predictions import predict_img_with_smooth_windowing
+from smooth_stitch import predict_img_with_smooth_windowing
 
 from your_code import your_model
 
